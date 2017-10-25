@@ -15,18 +15,12 @@ use \Psr\Http\Message\StreamInterface as PsrStreamInterface;
 use \Psr\Http\Message\UploadedFileInterface as PsrUploadedFileInterface;
 
 
-interface UploadedFileInterface extends PsrUploadedFileInterface
+interface FileInterface extends PsrUploadedFileInterface
 {
 	/**
 	 *	Set the stream which this uploaded file refers to.
 	 */
 	public function setStream(PsrStreamInterface $stream);
-	
-	
-	/**
-	 *	Set the size, either in bytes or null if unavailable, of the file
-	 */
-	public function getSize($size);
 	
 	
 	/**
@@ -38,11 +32,11 @@ interface UploadedFileInterface extends PsrUploadedFileInterface
 	/**
 	 *	Set the filename of the upload in question
 	 */
-    public function setClientFilename();
+    public function setClientFilename($filename);
     
     
     /**
      *	Set the MIME type of the upload in question
      */
-    public function setClientMediaType();
+    public function setClientMediaType($media_type);
 }
