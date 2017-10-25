@@ -1,0 +1,24 @@
+{
+    "name": "outragelib/psr7-file-stream",
+    "description": "PSR7 local file stream",
+    "type": "library",
+    "require": {
+        "psr/http-message": "^1.0@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Weston",
+            "email": "westie@typefish.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "OUTRAGElib\\": "./lib"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4@dev"
+    }
+}
