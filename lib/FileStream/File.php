@@ -105,6 +105,53 @@ class File implements FileInterface
      */
     public function moveTo($target_path)
     {
+    	if(!$this->stream)
+    		throw new RuntimeException("No stream is available");
+    	
+    	# if the file hasn't been uploaded correctly, then we can't proceed with
+    	# this!
+    	# @todo: group this into errors based on the following error codes:
+		# 	- UPLOAD_ERR_INI_SIZE
+		# 	- UPLOAD_ERR_FORM_SIZE
+		# 	- UPLOAD_ERR_PARTIAL
+		# 	- UPLOAD_ERR_NO_FILE
+		# 	- UPLOAD_ERR_NO_TMP_DIR
+		# 	- UPLOAD_ERR_CANT_WRITE
+		# 	- UPLOAD_ERR_EXTENSION
+		if($this->error !== UPLOAD_ERR_OK)
+    		throw new RuntimeException("No file has been uploaded");
+    	
+    	# first thing we need to do is make sure that the path we're wanting to move
+    	# this file to actually exists
+    	if(!is_string($target_path) || !strlen($target_path))
+    		throw new InvalidArgumentException("Invalid path format supplied");
+    	
+    	$target_base_path = dirname($target_path);
+    	
+    	if(!is_dir($target_base_path))
+    		throw new InvalidArgumentException("The target directory '".$target_base_path.DIRECTORY_SEPARATOR."' does not exist");
+    	
+    	$uri = $this->stream->getMetadata("uri");
+    	
+    	if(is_uploaded_file($uri))
+    	{
+    		if(move_uploaded_file($uri, $target_path))
+    			return true;
+    		
+    		throw new RuntimeException("Unable to move uploaded file");
+    	}
+    	else
+    	{
+    		# this will be developed on later.
+    		# the issue that we have at the moment is that i'm wanting this to be
+    		# able to take streams, and move them into files if necessary.
+    		# things to think of:
+    		#	- HTTP streams
+    		#	- string streams (tmp?)
+    		#	- bog standard file pointers??
+    	}
+    	
+   		throw new RuntimeException("Unable to move uploaded file");
     }
     
     
