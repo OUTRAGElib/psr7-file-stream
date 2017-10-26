@@ -32,11 +32,11 @@ interface FileInterface extends PsrUploadedFileInterface
 	/**
 	 *	Set the filename of the upload in question
 	 */
-    public function setClientFilename($filename);
-    
-    
-    /**
-     *	Set the MIME type of the upload in question
-     */
-    public function setClientMediaType($media_type);
+	public function setClientFilename($filename);
+	
+	
+	/**
+	 *	Set the MIME type of the upload in question
+	 */
+	public function setClientMediaType($media_type);
 }
